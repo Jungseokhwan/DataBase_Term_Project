@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<META http-equiv="content-type" content="text/html; charset=utf-8">
+<TITLE>당근마켓 - 사용자</TITLE>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        color: #FF8A3D;
+    }
+    .button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #FF8A3D;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    .search-form {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+</style>
+</HEAD>
+<BODY>
+
+<h1> 당근마켓 사용자 페이지 </h1>
+
+<div class="search-form">
+    <h3>검색</h3>
+    <FORM METHOD="get" ACTION="search.php">
+        카테고리: 
+        <select name="category_id">
+            <option value="">모든 카테고리</option>
+            <?php
+                include '../dbconn.php';
+                $sql = "SELECT * FROM Categories";
+                $result = mysqli_query($con, $sql);
+                while($row = mysqli_fetch_array($result)) {
+                    echo "<option value='".$row['category_id']."'>".$row['name']."</option>";
+                }
+                mysqli_close($con);
+            ?>
+        </select><br>
+        최소가격: <INPUT TYPE="number" NAME="min_price"><br>
+        최대가격: <INPUT TYPE="number" NAME="max_price"><br>
+        날짜: <INPUT TYPE="date" NAME="date"><br>
+        <INPUT TYPE="submit" VALUE="검색">
+    </FORM>
+</div>
+
+<a href='item_list.php' class="button"> 상품 목록 보기 </a>
+<a href='category_list.php' class="button"> 카테고리 목록 보기 </a>
+<a href='profile.php' class="button"> 내 정보 </a>
+<a href='chat.php' class="button"> 채팅 </a>
+<a href='my_items.php' class="button"> 내가 쓴 글 </a>
+
+<br>
+<a href='../main.html'> <-- 초기 화면으로 돌아가기</a>
+
+</BODY>
+</HTML>
